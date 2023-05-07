@@ -1,8 +1,9 @@
 from discord.ext import commands
 from discord import Intents
 
-
-bot = commands.Bot(' ', intents=Intents.default())
+intents = Intents.default()
+intents.message_content = True
+bot = commands.Bot('&&', intents=intents)
 
 
 async def setup_hook():
