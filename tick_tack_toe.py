@@ -66,7 +66,7 @@ class TickTackToe:
                     description='Вы не можете играть с ботами!'),
                 ephemeral=True
             )
-        if self.player_x.id == self.player_x.id:
+        if self.player_x.id == self.player_o.id:
             return await interaction.response.send_message(
                 embed=discord.Embed(
                     color=discord.Color.brand_red(),
