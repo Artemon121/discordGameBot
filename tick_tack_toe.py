@@ -3,6 +3,7 @@ from enum import Enum
 import discord
 from discord import ui, Interaction
 
+import checks
 
 class Player(Enum):
     X = True
@@ -63,20 +64,8 @@ class TickTackToe:
         """Start the game. Will respond to given interaction"""
         if self.player_x is None or self.player_o is None:
             raise ValueError('One of the players is missing!')
-        if self.player_x.bot or self.player_o.bot:
-            return await interaction.response.send_message(
-                embed=discord.Embed(
-                    color=discord.Color.brand_red(),
-                    description='Вы не можете играть с ботами!'),
-                ephemeral=True
-            )
-        if self.player_x.id == self.player_o.id:
-            return await interaction.response.send_message(
-                embed=discord.Embed(
-                    color=discord.Color.brand_red(),
-                    description='Вы не можете играть с самим собой!'),
-                ephemeral=True
-            )
+        if not checks.start_game_checks(interaction, self.player_x, self.player_o):
+            return
         await interaction.response.send_message(embed=self.get_game_embed(), view=GameView(self))
 
     def check_winner(self) -> tuple[Winner, list[int | None]]:
