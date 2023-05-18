@@ -2,6 +2,8 @@ from typing import Literal, Optional
 
 import discord
 from discord.ext import commands
+from discord import app_commands
+import tick_tack_toe
 
 
 class CommandsCog(commands.Cog):
@@ -44,6 +46,14 @@ class CommandsCog(commands.Cog):
                 ret += 1
 
         await ctx.send(f"Synced the tree to {ret}/{len(guilds)}.")
+
+    @app_commands.command(name='tick_tack_toe', description='Сыграть в крестики-нолики')
+    @app_commands.describe(member='С кем вы хотите сыграть')
+    async def play_tick_tack_toe(self, interaction: discord.Interaction, member: discord.Member) -> None:
+        game = tick_tack_toe.TickTackToe()
+        game.player_o = interaction.user
+        game.player_x = member
+        await game.start_game(interaction)
 
 
 async def setup(bot: commands.Bot):

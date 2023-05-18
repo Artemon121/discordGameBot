@@ -8,6 +8,7 @@ bot = commands.Bot('&&', intents=intents)
 
 async def setup_hook():
     await bot.load_extension('commands')
+    await bot.load_extension('context_menus')
 
 bot.setup_hook = setup_hook
 
