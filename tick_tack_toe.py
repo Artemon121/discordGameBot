@@ -51,8 +51,12 @@ class TickTackToe:
         e = discord.Embed(
             title='Крестики-Нолики'
         )
-        e.set_author(name=self.player_x.name + f'  {self.SYMBOL_X}', icon_url=self.player_x.display_avatar.url)
-        e.set_footer(text=self.player_x.name + f'  {self.SYMBOL_O}', icon_url=self.player_o.display_avatar.url)
+        if self.turn == Player.X:
+            e.set_author(name=self.player_x.name + f'  {self.SYMBOL_X}', icon_url=self.player_x.display_avatar.url)
+            e.set_footer(text=self.player_o.name + f'  {self.SYMBOL_O}', icon_url=self.player_o.display_avatar.url)
+        else:
+            e.set_author(name=self.player_o.name + f'  {self.SYMBOL_O}', icon_url=self.player_o.display_avatar.url)
+            e.set_footer(text=self.player_x.name + f'  {self.SYMBOL_X}', icon_url=self.player_x.display_avatar.url)
         return e
 
     async def start_game(self, interaction: Interaction) -> None:
