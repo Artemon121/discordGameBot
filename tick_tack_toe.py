@@ -64,7 +64,7 @@ class TickTackToe:
         """Start the game. Will respond to given interaction"""
         if self.player_x is None or self.player_o is None:
             raise ValueError('One of the players is missing!')
-        if not checks.start_game_checks(interaction, self.player_x, self.player_o):
+        if not await checks.start_game_checks(interaction, self.player_x, self.player_o):
             return
         await interaction.response.send_message(embed=self.get_game_embed(), view=GameView(self))
 

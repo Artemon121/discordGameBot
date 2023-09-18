@@ -58,7 +58,7 @@ class CommandsCog(commands.Cog):
         await game.start_game(interaction)
 
     @app_commands.command(name='rock_paper_scissors', description='Сыграть в камень-ножницы-бумагу')
-    @app_commands.describe(member='С кем вы хотите сыграть')
+    @app_commands.describe(user='С кем вы хотите сыграть')
     async def play_rock_paper_scissors(self, interaction: discord.Interaction, user: discord.User) -> None:
         game = rock_paper_scissors.RockPaperScissors()
         game.player1 = interaction.user
