@@ -3,6 +3,8 @@ from typing import Literal, Optional
 import discord
 from discord.ext import commands
 from discord import app_commands
+
+import rock_paper_scissors
 import tick_tack_toe
 
 
@@ -53,6 +55,14 @@ class CommandsCog(commands.Cog):
         game = tick_tack_toe.TickTackToe()
         game.player_o = interaction.user
         game.player_x = member
+        await game.start_game(interaction)
+
+    @app_commands.command(name='rock_paper_scissors', description='Сыграть в камень-ножницы-бумагу')
+    @app_commands.describe(member='С кем вы хотите сыграть')
+    async def play_rock_paper_scissors(self, interaction: discord.Interaction, user: discord.User) -> None:
+        game = rock_paper_scissors.RockPaperScissors()
+        game.player1 = interaction.user
+        game.player2 = user
         await game.start_game(interaction)
 
 
